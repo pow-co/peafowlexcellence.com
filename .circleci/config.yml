@@ -9,12 +9,12 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build docker image
-          command: docker build -t 21e8tech/peafowlexcellence.com:$CIRCLE_BRANCH ./webapp
+          command: docker build -t proofofwork/peafowlexcellence.com:$CIRCLE_BRANCH ./webapp
       - run:
           name: Push to Docker Hub
           command: |
             docker login --username $DOCKER_USER --password $DOCKER_PASSWORD
-            docker push 21e8tech/peafowlexcellence.com:$CIRCLE_BRANCH
+            docker push proofofwork/peafowlexcellence.com:$CIRCLE_BRANCH
 
 workflows:
   version: 2
