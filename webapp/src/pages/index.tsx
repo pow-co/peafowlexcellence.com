@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Dashboard from "../components/Dashboard";
+import VideoDashboard from "../components/VideoDashboard";
 import { useAPI } from "../hooks/useAPI";
 import { useTuning } from "../context/TuningContext";
 import { useRouter } from 'next/router'
+import { useAuth } from "src/hooks/useAuth";
+import { useTokenMeetLiveWebsocket } from "src/hooks/useWebsocket";
+
+import root from 'window-or-global'
+
+import { Socket } from 'socket.io-client'
+import { sendMessage } from "src/utils/bsocial/message";
+import axios from "axios";
+
 
 const Index = () => {
 
@@ -19,18 +28,18 @@ const Index = () => {
   );
 
   let questions = data?.questions;
-  let boosted_tx = questions?.map((q) => q.tx_id);
+  let boosted_tx = questions?.map((q: any) => q.tx_id);
   let recent_questions = recent?.questions;
   recent_questions = recent_questions?.filter(
-    (q) => !boosted_tx?.includes(q.tx_id)
+    (q: any) => !boosted_tx?.includes(q.tx_id)
   );
 
   console.log("QUERY", query)
 
   useEffect(() => {
 
-    if (window !== undefined) {
-      const hasteClient = window.haste.HasteClient.build()
+    if (root !== undefined) {
+      const hasteClient = root.haste.HasteClient.build()
 
       const details = hasteClient.getTokenDetails();
   
@@ -44,7 +53,7 @@ const Index = () => {
 
 
   return (
-    <Dashboard
+    <VideoDashboard
       data={questions}
       recent={recent_questions}
       error={error}

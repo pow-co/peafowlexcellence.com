@@ -83,6 +83,7 @@ const RelayContext = React.createContext(undefined);
 
 const RelayProvider = (props) => {
   const [relayPaymail, setRelayPaymail] = useLocalStorage(paymailStorageKey);
+  const [relayToken, setRelayToken] = useLocalStorage(relayTokenStorageKey);
   const [relayOne, setRelayOne] = useState();
   const [relayOtc, setRelayOtc] = useState();
   const [runOwner, setRunOwner] = useLocalStorage(runOwnerStorageKey);
@@ -116,6 +117,7 @@ const RelayProvider = (props) => {
     const token = await relayOne.authBeta();
 
     if (token && !token.error) {
+      setRelayToken(token)
       const payloadBase64 = token.split(".")[0]; // Token structure: "payloadBase64.signature"
       const { paymail: returnedPaymail } = JSON.parse(atob(payloadBase64));
       setRelayPaymail(returnedPaymail);
@@ -169,6 +171,7 @@ const RelayProvider = (props) => {
       ready,
       isApp,
       runOwner,
+      relayToken
     }),
     [
       relayOne,
@@ -181,6 +184,7 @@ const RelayProvider = (props) => {
       ready,
       isApp,
       runOwner,
+      relayToken
     ]
   );
 
@@ -202,4 +206,5 @@ export { RelayProvider, useRelay };
 //
 
 const paymailStorageKey = "askbitcoin__RelayProvider_paymail";
+const relayTokenStorageKey = "peafowl_excellence_RelayProvider_authToken"
 const runOwnerStorageKey = "askbitcoin__RelayProvider_runOwner";

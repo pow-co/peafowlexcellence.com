@@ -26,7 +26,7 @@ const BitcoinProvider = (props) => {
     twetchPaymail,
     twetchLogout,
   } = useTwetch();
-  const { relayAuthenticate, relaySend, relayPaymail, relayLogout } =
+  const { relayAuthenticate, relaySend, relayPaymail, relayLogout, relayToken } =
     useRelay();
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -224,6 +224,7 @@ const BitcoinProvider = (props) => {
       paymail,
       avatar,
       logout,
+      relayToken
     }),
     [
       wallet,
@@ -236,6 +237,7 @@ const BitcoinProvider = (props) => {
       avatar,
       paymail,
       logout,
+      relayToken
     ]
   );
 
