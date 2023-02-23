@@ -196,6 +196,12 @@ const BitcoinProvider = (props) => {
     }
   });
 
+  const login = () => {
+
+    setWallet('relayx')
+    authenticate('relayx')
+  }
+
   const logout = () => {
     switch (wallet) {
       case "twetch":
@@ -224,7 +230,8 @@ const BitcoinProvider = (props) => {
       paymail,
       avatar,
       logout,
-      relayToken
+      relayToken,
+      login
     }),
     [
       wallet,
@@ -237,7 +244,8 @@ const BitcoinProvider = (props) => {
       avatar,
       paymail,
       logout,
-      relayToken
+      relayToken,
+      login
     ]
   );
 

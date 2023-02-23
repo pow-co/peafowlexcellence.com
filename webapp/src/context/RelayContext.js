@@ -1,3 +1,4 @@
+import axios from "axios";
 import Script from "next/script";
 import React, {
   useCallback,
@@ -83,10 +84,13 @@ const RelayContext = React.createContext(undefined);
 
 const RelayProvider = (props) => {
   const [relayPaymail, setRelayPaymail] = useLocalStorage(paymailStorageKey);
-  const [relayToken, setRelayToken] = useLocalStorage(relayTokenStorageKey);
   const [relayOne, setRelayOne] = useState();
   const [relayOtc, setRelayOtc] = useState();
   const [runOwner, setRunOwner] = useLocalStorage(runOwnerStorageKey);
+  const [tokenBalance, setTokenBalance] = useState(0);
+
+  const token_contract =
+    "299714718f79589d48ebd0d61fc0eb07efad2a00c30582539835457ab346e171_o2"; // episode 2 of peafowlexcellence.com podcast
 
   const [ready, setReady] = useState(false);
 
@@ -97,6 +101,24 @@ const RelayProvider = (props) => {
       setReady(true);
     }
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(
+        `https://staging-backend.relayx.com/api/token/${token_contract}/owners`
+      );
+
+      const [owner] = data.data.owners.filter((owner) => {
+        return owner.paymail === relayPaymail;
+      });
+
+      if (relayPaymail && owner?.amount) {
+        setTokenBalance(owner?.amount);
+      } else {
+        setTokenBalance(0);
+      }
+    })();
+  }, [relayPaymail]);
 
   const isApp = useMemo(
     () => (relayOne && relayOne.isApp()) || false,
@@ -117,7 +139,6 @@ const RelayProvider = (props) => {
     const token = await relayOne.authBeta();
 
     if (token && !token.error) {
-      setRelayToken(token)
       const payloadBase64 = token.split(".")[0]; // Token structure: "payloadBase64.signature"
       const { paymail: returnedPaymail } = JSON.parse(atob(payloadBase64));
       setRelayPaymail(returnedPaymail);
@@ -169,9 +190,9 @@ const RelayProvider = (props) => {
       relaySend,
       relayLogout,
       ready,
+      tokenBalance,
       isApp,
       runOwner,
-      relayToken
     }),
     [
       relayOne,
@@ -182,9 +203,9 @@ const RelayProvider = (props) => {
       relaySend,
       relayLogout,
       ready,
+      tokenBalance,
       isApp,
       runOwner,
-      relayToken
     ]
   );
 
@@ -206,5 +227,4 @@ export { RelayProvider, useRelay };
 //
 
 const paymailStorageKey = "askbitcoin__RelayProvider_paymail";
-const relayTokenStorageKey = "peafowl_excellence_RelayProvider_authToken"
 const runOwnerStorageKey = "askbitcoin__RelayProvider_runOwner";

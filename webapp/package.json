@@ -1,6 +1,6 @@
 {
-  "name": "powmemes.com",
-  "version": "0.1.0",
+  "name": "peafowlexcellence.com",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -37,6 +37,7 @@
     "react-dom": "18.1.0",
     "react-dropzone": "^14.2.3",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-intl": "^6.2.10",
     "react-player": "^2.11.2",
     "react-redux": "^8.0.4",
     "react-toastify": "^9.1.1",
