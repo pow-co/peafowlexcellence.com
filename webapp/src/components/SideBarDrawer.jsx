@@ -130,12 +130,13 @@ const SideBarDrawer = () => {
                         <div className='text-base leading-4 grow'>Academy</div>
                     </div>
                 </Link>*/}
-                <Link href="/features">
+
+                <Link href="/episodes">
                     <div className='mt-4 flex items-center cursor-pointer px-5 rounded-none hover:transition-all hover:bg-gray-300 hover:dark:bg-gray-700 h-8 xl:h-[48px]'>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
-                        <div className='text-base leading-4 grow'>Features</div>
+                        <div className='text-base leading-4 grow'>Episodes</div>
                     </div>
                 </Link> 
                 <Link href="/settings">

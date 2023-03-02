@@ -1,40 +1,19 @@
 
-import React, { useRef, useCallback, useMemo, useContext, useEffect, useState } from "react";
-import Head from "next/head";
+import React, { useRef, useEffect, useState } from "react";
 import {
   ThreeColumnLayout,
   Loader,
-  SimplePostCard,
-  QuestionCard,
-  Placeholder,
-  Composer,
-  PostCard,
-  OnchainPostCard,
 } from ".";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { getLocalFeed, getLocalFeedPagination } from "../services";
+
 import Link from "next/link";
-import { useRelay } from "../context/RelayContext";
-import { useAPI } from "../hooks/useAPI";
 
-import { wrapRelayx } from 'stag-relayx'
-
-import moment from "moment";
 import { useTuning } from "../context/TuningContext";
 import { useRouter } from "next/router";
 import { useBitcoin } from "../context/BitcoinContext";
 
-import {useDropzone} from 'react-dropzone'
-
 import { useAuth } from '../hooks/useAuth'
 
-import root from 'window-or-global'
-
-//import ReactHlsPlayer from 'react-hls-player';
-
 import ReactPlayer from 'react-player'
-
-
 
 const baseStyle = {
   flex: 1,
@@ -210,56 +189,18 @@ const Dashboard = ({ data, recent, error, loading }: any) => {
 
   return (
     <>
-      <Script src={'https://8x8.vc/vpaas-magic-cookie-30f799d005ea4007aaa7afbf1a14cdcf/external_api.js'} />
 
     <ThreeColumnLayout>
       <div className="col-span-12 lg:col-span-6 min-h-screen">
       <div id="tokenmeet-video-container"></div>
 
         <div className="hidden lg:block mt-8">
-          {/*<MemeDropzone/>*/}
 
         </div>
         <div className="px-4 mt-2">
           <div className="flex my-6">
             <div className="flex">
-            {/*<div id="tokenmeet-video-container"></div>*/}
 
-
-              {/* <div
-                onClick={() => handleChangeTab("")}
-                className={
-                  tag === ""
-                    ? "text-sm leading-4 py-2 px-2 sm:px-3 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 font-medium mr-2 cursor-pointer rounded-md whitespace-nowrap"
-                    : "text-sm leading-4 py-2 px-2 sm:px-3 text-gray-700 dark:text-gray-300 font-normal mr-2 cursor-pointer rounded-md whitespace-nowrap"
-                }
-              >
-                All 🦚
-              </div> */}
-
-
-              {/* <div
-                //onClick={() => handleChangeTab("1F48E")}
-                onClick={() => handleChangeTab("project")}
-                className={
-                  //tag === "1F48E"
-                  tag === "project"
-                    ? "text-sm leading-4 py-2 px-2 sm:px-3 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 font-medium mr-2 cursor-pointer rounded-md whitespace-nowrap"
-                    : "text-sm leading-4 py-2 px-2 sm:px-3 text-gray-700 dark:text-gray-300 font-normal mr-2 cursor-pointer rounded-md whitespace-nowrap"
-                }
-              >
-                Experiments 💎
-              </div> */}
-              {/* <div
-                  onClick={() => handleChangeTab("test")}
-                  className={
-                    tag === "test"
-                      ? "text-sm leading-4 py-2 px-2 sm:px-3 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 font-medium mr-2 cursor-pointer rounded-md whitespace-nowrap"
-                      : "text-sm leading-4 py-2 px-2 sm:px-3 text-gray-700 dark:text-gray-300 font-normal mr-2 cursor-pointer rounded-md whitespace-nowrap"
-                  }
-                >
-                  Tests 🐛
-                </div> */}
             </div>
           </div>
         </div>
@@ -280,24 +221,8 @@ const Dashboard = ({ data, recent, error, loading }: any) => {
             <a style={{border: '2px solid white', padding: '1em'}} className="button" href="https://relayx.com/market/215ec0900ebc4ec65b52641e78a016b8c8957e6abe3c8b21e8e1284ce0278270_o2" rel="noreferrer" target="_blank">Buy the Ticket NFT</a>
             </button>
           <div id="tokenmeet-video-container">
-
-            
-
+        
           </div>
-
-
-
-
-            {/* <InfiniteScroll
-                dataLength={posts.length}
-                hasMore={hasMore}
-                next={fetchMore}
-                loader={<Loader />}
-                pullDownToRefresh
-                pullDownToRefreshThreshold={50}
-                refreshFunction={refresh}
-              >
-              </InfiniteScroll> */}
             
             {loading && <Loader />}
             {!loading && recent && (
@@ -308,12 +233,6 @@ const Dashboard = ({ data, recent, error, loading }: any) => {
               </div>
             )}
 
-
-            {/* {!recentLoading &&
-                !recentError &&
-                recent.questions.map((post) => (
-                  <QuestionCard key={post.tx_id} post={post} />
-                ))} */}
           </div>
         </div>
         {authenticated && (
