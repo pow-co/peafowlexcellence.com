@@ -34,8 +34,8 @@ const LiveStreamDashboard = () => {
             
           <div className="relative">
 
-          <h1 style={{width: '100%', fontSize: '40px'}}>Episode 3: 1CraigMason, 1DanielKrawisz, 1Ruth</h1>
-          <h4 className='episodeTitle' style={{width: '100%', fontSize: '20px'}}>Thursday March 2, 2023 - 19:00 UTC</h4>
+          <h1 style={{width: '100%', fontSize: '40px'}}>Episode 4: 1CraigMason, 1DanielKrawisz, 1IsaacMorehouse</h1>
+          <h4 className='episodeTitle' style={{width: '100%', fontSize: '20px'}}>Thursday March 9, 2023 - 19:00 UTC</h4>
 
           {tokenBalance > 0 ? (
               <ReactPlayer controls={true}  url={"https://video.liveapi.com/63d46a33f1a83789fcb550b3/vd27c717e0b94311edb465.mp4/index.m3u8"} />
