@@ -38,7 +38,7 @@ const LiveStreamDashboard = () => {
           <h4 className='episodeTitle' style={{width: '100%', fontSize: '20px'}}>Thursday March 9, 2023 - 19:00 UTC</h4>
 
           {tokenBalance > 0 ? (
-              <ReactPlayer controls={true}  url={"https://live.liveapi.com/63d46a33f1a83789fcb550b3/lv_25e2da80b39011ed8a35dd8d5b01a75f/index.m3u8"} />
+              <ReactPlayer controls={true}  url={"https://video.liveapi.com/63d46a33f1a83789fcb550b3/vddc47a130bec511ed83fe.mp4/index.m3u8"} />
           ): ( 
             <div className="mt-8 flex flex-col justify-center text-center">
             <Image loader={loader} src={'/images/peafowl-excellence-podcast-logo.png'} width={'100%'} height={'500px'} quality={100} />
