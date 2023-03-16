@@ -13,7 +13,7 @@ import loader from "../loader";
 
 import ReactPlayer from 'react-player'
 
-const token_origin = '2742dd3c94c50d5e801987b0bb1271c6fbfd5be2e1ea8baefd78d7b40938ce7e_o2'
+const token_origin = '80e777f1b5d436e68be7e28fd5a8ca851761f363d80cdc9addbde460c41a50fa_o2'
 
 const LiveStreamDashboard = () => {
 
@@ -34,11 +34,11 @@ const LiveStreamDashboard = () => {
             
           <div className="relative">
 
-          <h1 style={{width: '100%', fontSize: '40px'}}>Episode 4: 1CraigMason, 1DanielKrawisz, 1IsaacMorehouse</h1>
-          <h4 className='episodeTitle' style={{width: '100%', fontSize: '20px'}}>Thursday March 9, 2023 - 19:00 UTC</h4>
+          <h1 style={{width: '100%', fontSize: '40px'}}>Episode 4: 1CraigMason, 1OwenKellogg, 1BLUVNBU</h1>
+          <h4 className='episodeTitle' style={{width: '100%', fontSize: '20px'}}>Thursday March 16, 2023 - 19:00 UTC</h4>
 
           {tokenBalance > 0 ? (
-              <ReactPlayer controls={true}  url={"https://video.liveapi.com/63d46a33f1a83789fcb550b3/vddc47a130bec511ed83fe.mp4/index.m3u8"} />
+              <ReactPlayer controls={true}  url={"https://live.liveapi.com/63d46a33f1a83789fcb550b3/lv_b873fbf0c3b111ed83fe6d97d5111853/index.m3u8"} />
           ): ( 
             <div className="mt-8 flex flex-col justify-center text-center">
             <Image loader={loader} src={'/images/peafowl-excellence-podcast-logo.png'} width={'100%'} height={'500px'} quality={100} />
