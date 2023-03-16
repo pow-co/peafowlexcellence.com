@@ -90,7 +90,7 @@ const RelayProvider = (props) => {
   const [tokenBalance, setTokenBalance] = useState(0);
 
   const token_contract =
-    "2742dd3c94c50d5e801987b0bb1271c6fbfd5be2e1ea8baefd78d7b40938ce7e_o2"; // episode 4 of peafowlexcellence.com podcast
+    "80e777f1b5d436e68be7e28fd5a8ca851761f363d80cdc9addbde460c41a50fa_o2"; // episode 4 of peafowlexcellence.com podcast
 
   const [ready, setReady] = useState(false);
 
