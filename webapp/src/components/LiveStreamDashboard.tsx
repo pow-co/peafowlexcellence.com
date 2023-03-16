@@ -11,6 +11,8 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import loader from "../loader";
 
+import Link from 'next/link'
+
 import ReactPlayer from 'react-player'
 
 const token_origin = '80e777f1b5d436e68be7e28fd5a8ca851761f363d80cdc9addbde460c41a50fa_o2'
@@ -38,7 +40,10 @@ const LiveStreamDashboard = () => {
           <h4 className='episodeTitle' style={{width: '100%', fontSize: '20px'}}>Thursday March 16, 2023 - 19:00 UTC</h4>
 
           {tokenBalance > 0 ? (
+            <div>
               <ReactPlayer controls={true}  url={"https://live.liveapi.com/63d46a33f1a83789fcb550b3/lv_b873fbf0c3b111ed83fe6d97d5111853/index.m3u8"} />
+              <Link target="_blank" href={`https://pow.co/live/peafowl-excellence`}><h1 style={{fontSize: '200%',fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer'}} >Click Here for Live Chat & Video</h1></Link>
+              </div>
           ): ( 
             <div className="mt-8 flex flex-col justify-center text-center">
             <Image loader={loader} src={'/images/peafowl-excellence-podcast-logo.png'} width={'100%'} height={'500px'} quality={100} />
