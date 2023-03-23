@@ -14,16 +14,24 @@ import loader from "../loader";
 import Link from 'next/link'
 
 import ReactPlayer from 'react-player'
+import { Episode } from "./EpisodeDashboard";
+import moment from "moment-timezone";
 
 const token_origin = '80e777f1b5d436e68be7e28fd5a8ca851761f363d80cdc9addbde460c41a50fa_o2'
 
-const LiveStreamDashboard = () => {
+interface LiveStreamDashboardProps {
+  episode: Episode;
+}
+
+const LiveStreamDashboard = ({episode}: LiveStreamDashboardProps) => {
 
   const { tokenBalance } = useRelay();
 
   const { login, authenticated } = useBitcoin()
 
   const router = useRouter()
+
+  const date = moment(episode.date).tz('GMT').format('MMMM Do YYYY, H:mm')
 
   return (
 
@@ -36,8 +44,8 @@ const LiveStreamDashboard = () => {
             
           <div className="relative">
 
-          <h1 style={{width: '100%', fontSize: '40px'}}>Episode 4: 1CraigMason, 1OwenKellogg, 1BLUVNBU</h1>
-          <h4 className='episodeTitle' style={{width: '100%', fontSize: '20px'}}>Thursday March 16, 2023 - 19:00 UTC</h4>
+          <h1 style={{width: '100%', fontSize: '20px'}}>{episode.title}</h1>
+          <h4 className='episodeTitle' style={{width: '100%', fontSize: '12px'}}>{`${date} UTC`}</h4>
 
           {tokenBalance > 0 ? (
             <div>

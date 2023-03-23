@@ -24,13 +24,15 @@ const Index = () => {
       
         setEpisode(episodes[0])
 
+        console.log('EPISODE', episodes[0])
+
         setLoading(false)
 
         if (episodes[0].hls_playback_url) {
 
           setShowUpcomingLivestream(false)
 
-        } else {
+        } else {            
             
             setShowUpcomingLivestream(true)
         }
@@ -43,7 +45,7 @@ const Index = () => {
 
     return (
       <>
-        <LiveStreamDashboard />
+        <LiveStreamDashboard episode={episode}/>
       </>
     );
   } else {
@@ -53,10 +55,6 @@ const Index = () => {
       console.log('Episode', episode)
 
       return <EpisodeDashboard episode={episode} loading={loading} />
-
-    } else {
-
-      return <p>Loading...</p>
 
     }
   

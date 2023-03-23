@@ -52,6 +52,7 @@ const thumbsContainer = {
 
 export interface Episode {
   id: number;
+  date: Date;
   token_origin: string;
   title: string;
   hls_url: string;
