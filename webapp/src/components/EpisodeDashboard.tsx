@@ -14,6 +14,8 @@ import { useBitcoin } from "../context/BitcoinContext";
 import { useAuth } from '../hooks/useAuth'
 
 import ReactPlayer from 'react-player'
+import { useRelay } from "src/context/RelayContext";
+import { getTokenBalance } from "src/utils/relayx";
 
 const baseStyle = {
   flex: 1,
@@ -63,6 +65,8 @@ const Dashboard = ({episode, loading }:{episode: Episode | any, loading: boolean
 
   const { authenticated, paymail, relayToken } = useBitcoin()
 
+  const [tokenBalance, setTokenBalance] = useState<number>(0)
+
   const playerRef: any = useRef();
 
   function playVideo() {
@@ -83,6 +87,23 @@ const Dashboard = ({episode, loading }:{episode: Episode | any, loading: boolean
     window.playVideo = playVideo
     playVideo()
   }, [])
+
+  useEffect(() => {
+
+    if (!paymail || !episode) { return }
+
+    console.log("EPISODE", episode)
+
+    getTokenBalance({
+      origin: episode.token_origin,
+      paymail
+    })
+    .then(({balance}:{balance: number}) => {
+      setTokenBalance(balance)
+    })
+
+  }, [paymail, episode])
+
 
   return (
     <>
@@ -113,9 +134,12 @@ const Dashboard = ({episode, loading }:{episode: Episode | any, loading: boolean
           <br/>
 
           <br/>
-
+          {tokenBalance > 0 && (
           <ReactPlayer controls={true} url={episode.hls_playback_url} />
-          <br/>
+          )}
+                    <br/>
+
+
           <button>
             <a style={{border: '2px solid white', padding: '1em'}} className="button" href={`https://relayx.com/market/${episode.token_origin}`} rel="noreferrer" target="_blank">Buy the Ticket NFT</a>
           </button>          
