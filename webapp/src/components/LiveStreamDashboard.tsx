@@ -3,6 +3,8 @@ import React from "react";
 
 import { useRelay } from "../context/RelayContext";
 
+import { useState, useEffect } from 'react'
+
 import { useBitcoin } from "../context/BitcoinContext";
 
 import ThreeColumnLayout from '../components/ThreeColumnLayout';
@@ -17,15 +19,43 @@ import ReactPlayer from 'react-player'
 import { Episode } from "./EpisodeDashboard";
 import moment from "moment-timezone";
 
-const token_origin = '80e777f1b5d436e68be7e28fd5a8ca851761f363d80cdc9addbde460c41a50fa_o2'
-
 interface LiveStreamDashboardProps {
   episode: Episode;
 }
 
+import axios from 'axios'
+
 const LiveStreamDashboard = ({episode}: LiveStreamDashboardProps) => {
 
-  const { tokenBalance } = useRelay();
+  const [tokenBalance, setTokenBalance] = useState(0);
+
+  const { relayPaymail } = useRelay();
+
+  useEffect(() => {
+
+      if (!relayPaymail) { return }
+
+      axios.get(
+        `https://staging-backend.relayx.com/api/token/${episode.token_origin}/owners`
+      )
+      .then(({data}) => {
+
+	      console.log('checked token balance', data)
+
+	      const [owner] = data.data.owners.filter((owner: {paymail:string,amount:number}) => {
+						return owner.paymail === relayPaymail;
+	      });
+
+	      if (relayPaymail && owner?.amount) {
+						setTokenBalance(owner?.amount);
+	      } else {
+						setTokenBalance(0);
+	      }
+		})
+
+  }, [relayPaymail]);
+
+  console.log('livestream episode', episode)
 
   const { login, authenticated } = useBitcoin()
 
@@ -61,7 +91,7 @@ const LiveStreamDashboard = ({episode}: LiveStreamDashboardProps) => {
             <div className="flex flex-col mx-auto justify-center">
               {authenticated ? (
                 <button
-                  onClick={() => window.open(`https://relayx.com/market/${token_origin}`)}
+                  onClick={() => window.open(`https://relayx.com/market/${episode.token_origin}`)}
   
                     //onClick={() => router.push("/market")}
                   className="mt-2 text-white bg-gradient-to-tr from-blue-500 to-blue-600 leading-6 py-1 px-4 font-bold border-none rounded cursor-pointer flex items-center text-center justify-center disabled:opacity-50 transition duration-500 transform hover:-translate-y-1"
