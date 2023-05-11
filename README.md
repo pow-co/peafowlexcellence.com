@@ -1,104 +1,176 @@
-![Rabbi Banner Image](https://doge.bitcoinfiles.org/b463dd2d110537e2c33f26583ed86aa35bdb1bc4f99d8146a590d7a7e95c74a5)
+# AskBitcoin
 
-# Typescript API Server
+Game Design Document for https://shawars.com
 
-## Installation
+<img src="https://github.com/Krypt1k86/shawars-gdd/blob/master/sharwars.jpeg" alt="shawars" style="zoom: 67%;" />
 
-To download and install dependencies run `npm install` 
+A 21e8 & Infinite Game Co. production
 
-## Running
+## Project Description
 
-To run the API server run `npm start`
+Sha Wars allows individuals or community members to gauge sentiment, resolve conflicts as well as bet on the outcomes of disputes that have been submitted to a distributed network of players.
 
-## Testing
+1. Characters
+2. Story
+   - 2.1 Theme
+3. Story Progression
+4. Gameplay
+   - 4.1 Goal
+   - 4.2 User Skills
+   - 4.3 Game Mechanics
+   - 4.4 Powerups
+   - 4.5 Progression & Challenge
+   - 4.6 Losing
+5. Art style
+6. Sounds
+7. Technical description
+8. Marketing & Funding
+   - 8.1 Demographics
+   - 8.2 Platforms & Monetization
+   - 8.3 Localization
+9. Other ideas
 
-To run tests run `npm run test`
+## 1. Characters
 
-## Development
+Characters/Players will be matched up against one another through crowdsourced submissions and voting via Sha Wars hosted polls.
+There will be multiple trading pairs (matchups) that a player can choose to interact with and no default characters.
 
-To commit new code run `npm run commit`
+<img src="https://github.com/Krypt1k86/shawars-gdd/blob/master/choose%20your%20fighter.jpg" alt="matchup" style="zoom: 37%;" />
 
-## Configuration
+## 2. Story
 
-Rabbi may be configured in several ways depending on the needs of your environment.
+Each character/player will have a unique back story based on their experiences within their respective fields and graphical artwork to accompany their player card and trading pair.
+Trading pair matchups could range from future world leaders going head to head, to your favorite internet guru’s and thought leaders in order to find out who the market feels is the champion of their respective matchup.
 
-1) Environment Variables
+### 2.1. Theme
 
-2) Configuration Files
+This is a game that revolves around Proof of Work and hashing content. It’s about risk, finance, and reputation. All conflicts can be weighed In upon by the active participants giving a true market sentiment on a given issue at a specific time.
 
-3) Command Line Arguments
+The artistic theme relates to classic 8-bit games as the aesthetic and player matchup’s of these games arguably still remain top of their category with high visual appeal and easy to render design.
 
-The same variables are used in all three options, however in configuration files and command line arguments all variables are strictly lower case, whereas in environment variables they may be upper case or lower case.
+<img src="https://github.com/Krypt1k86/shawars-gdd/blob/master/rumble.jpeg" alt="rumble" style="zoom: 17%;" />
 
-### Environment Variables
+## 3. Story Progression
 
-| Variable             | Description                                                                             | Default | Required |
-|----------------------|-----------------------------------------------------------------------------------------|---------|----------|
-| HTTP_API_ENABLED     | Serve JSON API.                             | true    | false    |
-| AMQP_ENABLED         | Communicate between components via RabbitMQ. Require by some features under src/actors/ | true    | false    |
-| POSTGRES_ENABLED     | Will automatically begin logging events to postgres | true    | true     |
-| DATABASE_URL         | Postgres connection Url in the form `postgres://user:password@host:port/database        |         | true     |
-| HTTP_API_HOST        | IP address to bind when serving. Set to 127.0.0.1 or localhost for local-only access    | 0.0.0.0 | false    |
-| HTTP_API_PORT        | Port to bind when accepting new API client connections.                                 | 5200    | false    |
-| PROMETHEUS_ENABLED   | Expose /metrics endpoint to allow prometheus to scrape default and your custom metrics. | true    | false    |
-| LOKI_ENABLED         | Stream logs from the application to a loki log aggregation server.                      | false   | false    |
+The game starts with a trading pair (matchup) being crowdsourced from the community. Once there is momentum behind this matchup, a Sha War may be submitted with a start and end time (block height).
 
+When the matchup is listed and trading is active, players can vote on who they think is right/will win via micro-transactions and compute power.
 
-### Configuration Files
+After a player wins, they then would either advance to the next round of the tournament or have won the conflict if the matchup is solely a head to head competition.
 
-The app loads files from a hierarchy each overriding the previous. First the system level config files are loaded, then user level config file, finally the local config file for development purposes
+Contestants win disputes and reputation points while players voting (submitting hashes) could win via betting within a prediction market that could arise.
 
-1) /etc/rabbi/rabbi.json
+## 4. Gameplay
 
-2) ~/.rabbi/rabbi.json
+Individuals not hosted as a trading pair can interact with the game via voting buttons that send a specific target and hash to be mined on the bitcoin network.
 
-3) .config/rabbi.json
+All votes submitted will be able to be viewed in real time via the transaction index as well as at https://sha.center.
 
-Config files are JSON objects containing key value pairs where the key is the config variable and the value is the value of the variable. Numbers and booleans will be parsed and made available. Variable names can be either upper or lower case.
+There is a live chat element for players to communicate and discuss current sentiment, future trading pairs, trading pair status, etc… as well.
 
-```
-{
-	"database_url": "postgres://postgres:12321423fekrefk@mydb.example.com:5432/boostpow",
-	"http_api_port": 3000,
-	"loki_enabled": true,
-	"loki_url": "https://loki.example.com",
-	"prometheus_enabled": false
-}
-```
+### 4.1. Goals
 
-## System Events
+Overall (long term): Introduce an easy to use platform for hashing content and distributing conflict resolution/sentiment of the market to the wider world, and create a protocol for resolving conflicts on-chain.
 
-When using AMQP you may bind the following events as routingkeys to receive delivery of these messages to your application. You may also choose to receive these events via Webhook by configuring the `WEBHOOK_URL` and `WEBHOOKS_ENABLED` variables.
+Gameplay (short term): Defeat your opponent and/or become the most powerful player in the game of bitcoin within the 21e8 universe.
 
-| Event                | Description                                                                             |
-|----------------------|-----------------------------------------------------------------------------------------|
-| prometheus.metrics.scraped   | Every time prometheus scrapes   |
-| http.request  | When a client makes a request to the HTTP API |
+### 4.2. User Skills
 
-Additional events can be published and listened to using rabbi
+- Clicking button(s)
+- Manage resources
+- Strategy
 
-```
-import { events } from 'rabbi'
+### 4.3. Game Mechanics
 
-events.publish('game.ended', { winner: 'nobody' })
+The game mechanics are quite simple. A player can interact with the game by using the vote power button to apply proof of work towards whichever hash in a trading pair that they would like to support (see win).
 
-```
-Then in another component or process, or app connected to the same AMQP:
+Players can view the “live feed” activity directly on the sha wars homepage as well as interact with other players via the Checksums chat-box.
 
-```
-import { events } from 'rabbi'
+A player is not limited to a single vote and can place wagers/predictions on the outcome of individual trading pairs.
 
-events.on('game.ended', (message: Buffer, json?: any) => {
+Those involved in a dispute can choose whether the winner is decided by most proof of work or highest power rating at the end of a given time period.
 
-  console.log('---- GAME OVER ----')
+### 4.4. Power-ups
 
-  if (json && json.winner === 'nobody') {
+When submitting a hash to be accounted for, the target used defines the amount of power associated with a player’s vote.
 
-    console.log('nobody wins')
+It can be a 🔥, 💥, 👍, ❤️, to add power, or, an adversarial player may use power-ups against an apposing team by sending hashes with negative power associated to them such as 🤮, 😡, 👎, ☭ emoji’s in hex code.
 
-  }
+### 4.5 Losing
 
-})
+These are the losing conditions:
 
-```
+Power-based matchups:
+At the end of the agreed upon block height, the team with the lower power score loses. A loss will be reflected on this contestants global stats as well as impact their power rating going forward into future matchups.
 
+Count-based matchups:
+In a count-based matchup, at the end of the agreed upon Block height, the team with the least amount of votes submitted will have lost. Power is not a factor in the final decision in these types of matchups, although, power-ups associated to the votes submitted do impact the power rating of a participating team.
+
+\*Continued loss within Shawars could have longstanding effects to a players on-chain reputation.
+
+## 5. Art Style
+
+This is a 2D, 8-bit retro themed game with real time data visualizations. The trading pair and character art should resemble that of late 80’s-90’s arcade style fighters.
+
+All of the data streams should be colorful and the game should feel lively with the interactive chat.
+
+## 6. Sounds
+
+If we have music, it should have a retro style, appealing to 8-bit nostalgia but high quality.
+t’s important that the sound effects are rewarding as to notify a player each time they’ve successfully submitted an action.
+When time is running low, an alert sound can go off each block prior to the match expiring.
+
+## 7. Technical description
+
+Initially the game will be web-based only.
+
+Mobile cross-platform optimization for iOS and Android could come further down the road of development and app progression.
+
+Protocol/Standard could be released in the future for other platforms to create their own version of Sha Wars where the following tools would be necessary:
+HummingBird or Mattermost transaction crawler
+BitCoin full node
+Cloud server such as AWS/Digital Ocean
+MinerButton, MoneyButton, and/or Relay One
+
+For project management, use JIRA.
+
+For server-less deployment and testing, use Vercel.
+
+For code submission and collaboration, participate in Agencies.Gitlab.
+
+## 8. Marketing & Funding
+
+Prototype the first level, and then we will outsource job contracts via EarnSV tasks for future development.
+
+Twetch, Bit.sv, and Twitter will be used to market the product, trading pairs, as well as crowdsource original artwork and trading pair submissions.
+
+Create a press kit to send to bitcoin/tech news outlet magazines.
+
+Entertain investment offers after product launch.
+
+### 8.1. Demographics
+
+Age: 22-50
+Sex: Male & Female
+Technologists, Fincen, and cryptocurrency users
+
+### 8.2. Platforms & Monetization
+
+This is a pay-to-play game leveraging micro-transactions on bitcoin. Submitted votes towards a team costs at present $0.02 per vote.
+
+Anyone in the world can profit from participation by choosing to participate in the “counting” of the votes being submitted through mining.
+
+Mining can be done currently via 21e8 Miner, jsMiner, Master Race Miner v2, or Pow-Pow.
+
+### 8.3. Localization
+
+Initial support will only be in English.
+
+## 9. Other ideas
+
+- Ratings for matchups
+- Live stream event plug-in
+- Global Leaderboard
+- Detailed player stat pages
+- Multi-team trading pairs to incorporate 3,4, etc… people in a matchup
+- Interactive live streaming transaction feed
