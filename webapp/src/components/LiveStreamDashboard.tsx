@@ -29,6 +29,8 @@ const LiveStreamDashboard = ({episode}: LiveStreamDashboardProps) => {
 
   const [tokenBalance, setTokenBalance] = useState(0);
 
+  const [authRequired, setAuthRequired] = useState<Boolean>(!!episode.token_origin);
+
   const { relayPaymail } = useRelay();
 
   useEffect(() => {
@@ -77,7 +79,7 @@ const LiveStreamDashboard = ({episode}: LiveStreamDashboardProps) => {
           <h1 style={{width: '100%', fontSize: '20px'}}>{episode.title}</h1>
           <h4 className='episodeTitle' style={{width: '100%', fontSize: '12px'}}>{`${date} UTC`}</h4>
 
-          {tokenBalance > 0 ? (
+          {!authRequired || tokenBalance > 0 ? (
             <div>
               <ReactPlayer controls={true}  url={"https://live.liveapi.com/63d46a33f1a83789fcb550b3/lv_b873fbf0c3b111ed83fe6d97d5111853/index.m3u8"} />
               <Link target="_blank" href={`https://pow.co/live/peafowl-excellence`}><h1 style={{fontSize: '200%',fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer'}} >Click Here for Live Chat & Video</h1></Link>
